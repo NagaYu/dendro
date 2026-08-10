@@ -95,8 +95,13 @@ def test_second_request_is_served_from_cache(tmp_path):
 
 
 def test_cache_survives_a_new_client(tmp_path):
+    # ``offline=False`` explicitly: this test injects a transport and *means* to
+    # exercise the fetch-and-store path.  Left implicit it inherits DENDRO_OFFLINE,
+    # which CI sets for the whole suite as a real-network safety net -- so the test
+    # passed locally and failed in CI, which is the wrong way round.
     session = CountingSession()
-    HttpClient(cache=Cache(root=tmp_path, overlays=[]), session=session).get_json("https://example.org/b")
+    HttpClient(cache=Cache(root=tmp_path, overlays=[]), session=session,
+               offline=False).get_json("https://example.org/b")
     fresh = HttpClient(cache=Cache(root=tmp_path, overlays=[]), offline=True, session=ExplodingSession())
     assert fresh.get_json("https://example.org/b") == {"ok": True}
 
@@ -161,7 +166,8 @@ def test_cached_requests_are_not_throttled(tmp_path):
     session = CountingSession()
     slept: list[float] = []
     limiter = RateLimiter(rates={"_default": 0.5}, burst=1.0, sleep_fn=lambda s: slept.append(s))
-    client = HttpClient(cache=Cache(root=tmp_path, overlays=[]), rate_limiter=limiter, session=session)
+    client = HttpClient(cache=Cache(root=tmp_path, overlays=[]), rate_limiter=limiter,
+                        session=session, offline=False)
     client.get_json("https://example.org/c")
     n_after_first = len(slept)
     for _ in range(5):

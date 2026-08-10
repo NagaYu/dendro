@@ -20,6 +20,11 @@ tags:
 
 # 🌳 Dendro
 
+[![tests](https://github.com/NagaYu/dendro/actions/workflows/tests.yml/badge.svg)](https://github.com/NagaYu/dendro/actions/workflows/tests.yml)
+[![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-dendro--lowbackground-blue)](https://huggingface.co/datasets/NagaYu/dendro-lowbackground)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](pyproject.toml)
+
 **Stop asking whether a document *looks* generated. Ask who, other than its author, saw it — and when.**
 
 Synthetic-text detectors read prose and guess. That guess gets worse every time a model
