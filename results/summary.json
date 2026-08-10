@@ -1,0 +1,59 @@
+{
+  "corpus": {
+    "archive": 458,
+    "human_old(i)": 400,
+    "human_recent(ii)": 500,
+    "synthetic(iii)": 360,
+    "unseen_family(iii-b)": 120,
+    "paraphrased(iv-a)": 80,
+    "backdated(iv-b)": 60,
+    "lm_train": 900,
+    "reference": 500
+  },
+  "seed": 20260810,
+  "offline": false,
+  "headline": {
+    "A": {
+      "auc_lowbackground": 0.7378,
+      "auc_all_eras": 0.5865,
+      "auc_gen_seen": 0.8708,
+      "auc_gen_unseen": 0.6714,
+      "gen_drop": 0.1994,
+      "auc_unseen_family": 0.2341,
+      "family_drop": 0.6367,
+      "auc_paraphrase_055": 0.1406,
+      "auc_backdate": 0.7352,
+      "backdate_drop": 0.0026,
+      "backdate_flag_rate": 0.0,
+      "false_flag_rate": 0.0
+    },
+    "B": {
+      "auc_lowbackground": 0.9869,
+      "auc_all_eras": 0.985,
+      "auc_gen_seen": 0.9923,
+      "auc_gen_unseen": 0.9843,
+      "gen_drop": 0.008,
+      "auc_unseen_family": 0.9612,
+      "family_drop": 0.0311,
+      "auc_paraphrase_055": 0.9531,
+      "auc_backdate": 0.9824,
+      "backdate_drop": 0.0045,
+      "backdate_flag_rate": 0.0,
+      "false_flag_rate": 0.0
+    },
+    "C": {
+      "auc_lowbackground": 1.0,
+      "auc_all_eras": 1.0,
+      "auc_gen_seen": 1.0,
+      "auc_gen_unseen": 1.0,
+      "gen_drop": 0.0,
+      "auc_unseen_family": 1.0,
+      "family_drop": 0.0,
+      "auc_paraphrase_055": 1.0,
+      "auc_backdate": 1.0,
+      "backdate_drop": 0.0,
+      "backdate_flag_rate": 1.0,
+      "false_flag_rate": 0.0
+    }
+  }
+}

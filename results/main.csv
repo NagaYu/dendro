@@ -1,0 +1,13 @@
+condition,method,method_name,n_pos,n_neg,auc,ece,brier,mean_p_pos,mean_p_neg,abstain_rate,abstain_rate_pos,abstain_rate_neg
+lowbackground,A,statistical,160,144,0.7378,0.3824,0.3841,0.921,0.8951,0.0,0.0,0.0
+lowbackground,B,learned,160,144,0.9869,0.0936,0.0776,0.975,0.2253,0.0,0.0,0.0
+lowbackground,C,dendro,160,144,1.0,0.0001,0.0,0.9999,0.0001,0.4737,0.0,1.0
+all_eras,A,statistical,535,144,0.5865,0.1312,0.1806,0.8993,0.8951,0.0,0.0,0.0
+all_eras,B,learned,535,144,0.985,0.0303,0.0406,0.975,0.2253,0.0,0.0,0.0
+all_eras,C,dendro,535,144,1.0,0.0001,0.0,0.9999,0.0001,0.2121,0.0,1.0
+recent_only,A,statistical,375,144,0.522,0.1942,0.2338,0.89,0.8951,0.0,0.0,0.0
+recent_only,B,learned,375,144,0.9842,0.0462,0.0494,0.9751,0.2253,0.0,0.0,0.0
+recent_only,C,dendro,375,144,1.0,0.0001,0.0,0.9998,0.0001,0.2775,0.0,1.0
+recent_unwitnessed,A,statistical,250,144,0.5379,0.2773,0.3026,0.8929,0.8951,0.0,0.0,0.0
+recent_unwitnessed,B,learned,250,144,0.9896,0.0726,0.0575,0.9847,0.2253,0.0,0.0,0.0
+recent_unwitnessed,C,dendro,250,144,0.5,0.6344,0.6344,0.0001,0.0001,1.0,1.0,1.0

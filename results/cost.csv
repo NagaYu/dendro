@@ -1,0 +1,4 @@
+method,method_name,documents_scored,requests,hits,misses,hit_rate,network_calls,errors,offline_misses,bytes_down,network_seconds,throttle_seconds,wall_seconds,network_calls_per_doc,seconds_per_doc,fit_seconds,coverage_probe_cache_entries
+C,dendro,1579,384,364,20,0.9479,0,0,20,0,0.0,0.0,0.028,0.0,0.0056,5.193,21
+A,statistical,1579,0,0,,,0,,,,,,,,0.0,0.564,
+B,learned,1579,0,0,,,0,,,,,,,,0.0,1.28,
