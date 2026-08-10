@@ -32,3 +32,8 @@ venv/
 # (the archive layer is 450 arXiv documents instead of 458). Re-fetch locally
 # with `python -m scripts.fetch_corpus --skip-arxiv`.
 data/local/
+
+# Space staging is assembled on demand by scripts/publish_space.py
+/space/dendro/
+/space/figures/
+/space/data/
