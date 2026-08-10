@@ -1,54 +1,61 @@
 # LinkedIn post
 
-Primary version below. A Japanese cut, a short version for X / Bluesky, two likely comment
-replies, and posting notes follow.
+**Paste-ready.** LinkedIn renders no markdown — asterisks show up literally — so the two main
+versions below are plain text, using only `•`, `→` and `—`, which survive. Copy from the first
+line to the hashtags and paste directly.
+
+A short social cut, two likely comment replies, and posting notes follow.
 
 ---
 
-## Main post (English, ~340 words)
+## Main post — English (paste-ready, ~330 words)
 
 AI-text detectors read prose. Prose is the part an adversary controls.
 
-Paraphrase a human's writing and a perplexity detector doesn't just fail — in my benchmark it
-goes **below chance** (AUC 0.14), systematically calling rewritten human writing synthetic.
-Attach a forged `<meta name="date">` and it notices nothing at all, because the prose is
-unchanged.
+Paraphrase someone's writing and a perplexity detector doesn't merely fail. In my benchmark it
+goes below chance — AUC 0.14 — systematically calling rewritten human writing synthetic. Forge
+the date in a meta tag and it notices nothing at all, because the prose is innocent.
 
-So I built **Dendro** to ask a different question: *who, other than the author, saw this — and
-when?*
+So I built Dendro to ask a different question: who, other than the author, saw this — and when?
 
-**Code, benchmark, tests:** https://github.com/NagaYu/dendro
-**Dataset:** https://huggingface.co/datasets/NagaYu/dendro-lowbackground
+Code, benchmark, tests → https://github.com/NagaYu/dendro
+Dataset → https://huggingface.co/datasets/NagaYu/dendro-lowbackground
 
 The name is from dendrochronology. You don't date a beam by inspecting the grain for signs of
-modernity — you match its ring pattern against an independent chronology. Dendro matches a
-document's fingerprint against archives whose timestamps are already witnessed: the Internet
-Archive, Common Crawl, arXiv, Crossref, public posting archives.
+modernity. You match its ring pattern against an independent chronology built from wood whose
+age is already known. Dendro matches a document's fingerprint against archives whose timestamps
+are already witnessed — the Internet Archive, Common Crawl, arXiv, Crossref, public posting
+archives — and treats operators, not records, as the unit of independence. Twenty captures from
+one archive are one archive.
 
-**Measured on 5,034 real arXiv records** against a perplexity detector (A) and a learned
+Measured on 5,034 real arXiv records, against a perplexity detector (A) and a learned
 classifier (B):
 
-• Six generator generations, each **measurably** closer to human text: (A) decays 0.89 → 0.62.
-Dendro is flat at 1.00 — it never reads the prose, so there is no channel through which the
-generator *could* matter
-• On a generator family nobody trained on, (A) inverts to **0.23**. Confidently wrong
-• Paraphrase attack strong enough to destroy 83% of exact word 5-grams: (A) 0.14, Dendro 1.00
-— the rewrite aligns to its 2019 ancestor and inherits that date
-• Backdated metadata: **100% of forgeries caught, 0% false accusations.** (A) and (B) catch 0%,
-structurally — they read prose, and the prose is innocent
+• Six generator generations, each measurably closer to human text. (A) decays 0.89 → 0.62.
+Dendro stays flat at 1.00 — it never reads the prose, so there is no channel through which the
+generator could matter.
 
-**And the column that matters most:** on recent human documents that no archive happens to
-hold, Dendro drops to **0.500 — exactly chance — and abstains on 100% of them.** The learned
-classifier scores 0.99 there. For unarchived recent text, (B) is simply the better tool.
+• On a generator family nobody trained on, (A) inverts to 0.23. Not uninformative. Confidently
+wrong.
 
-I put that column in the README table, not a footnote. A provenance tool that publishes only
-its flattering numbers is the failure mode I was trying to avoid.
+• A paraphrase attack strong enough to destroy 83% of exact word 5-grams: (A) 0.14, Dendro
+1.00. The rewrite aligns to its 2019 ancestor and inherits that date.
 
-Dendro is **not** an AI-writing detector and must not be used as one. It reports archival
-evidence of prior existence. A document with no record is *unknown*, never *generated* — most
-text that has ever existed was never archived by anyone.
+• Backdated metadata: 100% of forgeries caught, 0% false accusations. (A) and (B) catch 0% —
+structurally, because they read prose and the prose is unchanged.
 
-96 tests, fully offline. Apache-2.0.
+And the number that matters most. On recent human documents that no archive happens to hold,
+Dendro drops to 0.500 — exactly chance — and abstains on 100% of them. The learned classifier
+scores 0.99 there. For unarchived recent text, (B) is simply the better tool.
+
+That column is in the README table, not a footnote. A provenance tool that publishes only its
+flattering numbers is the failure mode I was trying to avoid.
+
+Dendro is not an AI-writing detector and must not be used as one. It reports archival evidence
+of prior existence. A document with no record is unknown, never generated — most text that has
+ever existed was never archived by anyone.
+
+96 tests, fully offline, byte-identical across runs. Apache-2.0.
 
 #DataProvenance #MachineLearning #DataQuality #OpenSource #HuggingFace #AIDetection
 
@@ -97,40 +104,54 @@ https://github.com/NagaYu/dendro
 
 ---
 
-## 日本語版（~400字）
+## Main post — 日本語（paste-ready）
 
 AI生成テキスト検出器は「文章」を読みます。しかし文章は、攻撃者が自由に書き換えられる部分です。
 
-人間が書いた文章をLLMで言い換えると、パープレキシティ系検出器は失敗するだけでなく、**AUC 0.14
-——偶然以下**まで落ちます。つまり人間の文章を体系的に「合成」と誤判定する。逆に、偽の古い日付を
-メタデータに埋め込んでも何も気づきません。文章自体は変わっていないからです。
+人間が書いた文章をLLMで言い換えると、パープレキシティ系の検出器は単に失敗するのではなく、
+AUC 0.14——偶然を下回ります。つまり人間の文章を、体系的に「合成」と誤判定する。逆に、メタタグに
+偽の古い日付を埋め込んでも何も気づきません。文章自体は変わっていないからです。
 
-そこで **Dendro** は別の問いを立てます。「著者以外の誰が、いつこの内容を見たか?」
+そこで Dendro は別の問いを立てました。著者以外の誰が、いつこの内容を見たのか?
 
-年輪年代学が由来です。木材の年代は木目を見て判定するのではなく、既知の年代系列と照合して決めます。
-Dendroも同様に、Internet Archive・Common Crawl・arXiv 等、**独立した運営主体**のアーカイブ記録と
-文書指紋を照合します。
+コード・ベンチマーク・テスト → https://github.com/NagaYu/dendro
+データセット → https://huggingface.co/datasets/NagaYu/dendro-lowbackground
 
-実データ(arXiv 5,034件)での測定:
+名前は年輪年代学に由来します。木材の年代は、木目に「新しさの兆候」を探して判定するのではなく、
+年代が既知の木材から作られた独立した年輪系列と照合して決めます。Dendro も同じように、文書の指紋を
+Internet Archive・Common Crawl・arXiv・Crossref 等、既に時刻が witness されたアーカイブと照合
+します。そして独立性の単位を「レコード数」ではなく「運営主体」に置きます。同一アーカイブの20件の
+キャプチャは、1つのアーカイブでしかありません。
 
-• 生成モデルの世代が上がるほど (A) は 0.89 → 0.62 に劣化。Dendro は 1.00 で水平——本文を一切
-読まないため、生成モデルが影響する経路が存在しない
-• 未知の生成モデル系列では (A) は **0.23** に反転(自信を持って誤答)
-• 言い換え攻撃(単語5-gramの83%を破壊)でも Dendro は 1.00。2019年の祖先文書に整列し、その
-日付を継承する
-• バックデート偽装:**検出率100%、誤検出0%**。(A)(B) は構造上0%
+実データ(arXiv 5,034件)での測定。比較対象はパープレキシティ系検出器 (A) と学習型分類器 (B):
 
-**そして最も重要な数字**:アーカイブに記録のない最近の人間の文章では、Dendro は **0.500——
-完全に偶然——となり、100%棄権します**。学習型検出器はそこで0.99。未アーカイブの最近の文章に
-関しては (B) の方が優れたツールです。
+• 生成モデルの世代を6段階、各世代が「人間の文章への距離」で実測して近づく設計。(A) は
+0.89 → 0.62 に劣化。Dendro は 1.00 で水平——本文を一切読まないため、生成モデルが影響しうる
+経路が存在しない。
 
-この列を脚注ではなくREADMEの表に入れました。都合の良い数字だけを公開する来歴ツールこそ、
+• 学習時に存在しなかった生成モデル系列では、(A) は 0.23 に反転。情報がないのではなく、
+自信を持って誤答する。
+
+• 単語5-gramの83%を破壊する言い換え攻撃:(A) 0.14、Dendro 1.00。書き換え後も2019年の祖先文書に
+整列し、その日付を継承する。
+
+• バックデート偽装:検出率100%、誤検出0%。(A)(B) は構造上0%——本文を読む手法にとって、
+本文は無改変だから。
+
+そして最も重要な数字。アーカイブに記録が存在しない最近の人間の文章では、Dendro は 0.500——
+完全に偶然——まで落ち、100%棄権します。学習型分類器はそこで 0.99。未アーカイブの最近の文章に
+関しては、(B) の方が単純に優れたツールです。
+
+この列は脚注ではなく README の表に入れました。都合の良い数字だけを公開する来歴ツールこそ、
 避けたかった失敗そのものだからです。
 
-Dendro は AI検出器ではなく、そう使ってはいけません。報告するのは「事前存在の証跡」だけです。
-記録がない文書は「不明」であって「生成」ではありません。
+Dendro は AI検出器ではありませんし、そう使ってはいけません。報告するのは「事前存在の証跡」
+だけです。記録のない文書は「不明」であって「生成」ではありません——これまで存在した文章の
+大半は、誰にもアーカイブされていないのですから。
 
-https://github.com/NagaYu/dendro
+テスト96件、完全オフライン、再実行でバイト単位一致。Apache-2.0。
+
+#データ来歴 #機械学習 #データ品質 #OpenSource #HuggingFace #AI検出
 
 ---
 
