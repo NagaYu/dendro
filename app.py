@@ -24,6 +24,7 @@ import json
 import os
 import pathlib
 import sys
+import tempfile
 import traceback
 
 import gradio as gr
@@ -73,9 +74,23 @@ evidence when coverage is measured, which is why a page nobody ever crawled is n
 """
 
 
+def _writable_cache_root() -> pathlib.Path:
+    """Where newly fetched responses go.
+
+    A temp directory rather than the app directory, because hosted runtimes do not
+    all give you a writable checkout — and the *committed* fixture cache is layered
+    underneath read-only by :class:`~dendro.cache.Cache` regardless, so the bundled
+    examples answer instantly and without touching the archives either way.
+    """
+    env = os.environ.get("DENDRO_CACHE")
+    if env:
+        return pathlib.Path(env)
+    return pathlib.Path(tempfile.gettempdir()) / "dendro-cache"
+
+
 def _build() -> Dendro:
     client = HttpClient(
-        cache=Cache(root=os.environ.get("DENDRO_CACHE") or (REPO / ".dendro-cache")),
+        cache=Cache(root=_writable_cache_root()),
         rate_limiter=RateLimiter(),
         offline=os.environ.get("DENDRO_OFFLINE", "").lower() in {"1", "true", "yes"},
         timeout=25.0,

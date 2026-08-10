@@ -227,11 +227,18 @@ class Cache:
             "payload": payload,
         }
         with self._lock:
-            path.parent.mkdir(parents=True, exist_ok=True)
-            tmp = path.with_suffix(".tmp")
-            with tmp.open("w", encoding="utf-8") as fh:
-                json.dump(record, fh, ensure_ascii=False)
-            tmp.replace(path)
+            try:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                tmp = path.with_suffix(".tmp")
+                with tmp.open("w", encoding="utf-8") as fh:
+                    json.dump(record, fh, ensure_ascii=False)
+                tmp.replace(path)
+            except OSError:
+                # A read-only filesystem (some hosted runtimes) costs caching, not
+                # correctness: the fetch already succeeded and the caller has its
+                # answer.  Failing here would turn "cannot write a cache file" into
+                # "cannot date this document", which is the wrong trade.
+                pass
 
     def has(self, key: str) -> bool:
         return self.get(key) is not None
