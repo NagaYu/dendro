@@ -1,4 +1,4 @@
-# LinkedIn post
+# Social posts — LinkedIn and X
 
 **Paste-ready.** LinkedIn renders no markdown — asterisks show up literally — so the two main
 versions below are plain text, using only `•`, `→` and `—`, which survive. Copy from the first
@@ -155,19 +155,165 @@ Dendro は AI検出器ではありませんし、そう使ってはいけませ�
 
 ---
 
-## Short version (X / Bluesky)
+## X / Bluesky
+
+Every post below is verified against X's *weighted* character count — CJK counts double
+(so Japanese effectively gets 140), and URLs always count as 23 regardless of length. Counts
+in brackets. Paste each block as one post.
+
+### Single standalone post — English [272/280]
 
 AI-text detectors read prose. Prose is what an adversary controls.
 
-Paraphrase human writing → perplexity detector goes *below chance* (0.14), calling humans
-synthetic. Forge a date → it notices nothing.
+Paraphrase human writing and a perplexity detector doesn't just fail — it goes below chance
+(AUC 0.14), calling humans synthetic.
 
-Dendro asks who else saw the document, and when. Flat 1.00 across six generator generations,
-100% of backdate forgeries caught.
-
-And 0.500 — chance — where no archive holds a record. It abstains instead of guessing.
+Dendro asks who else saw the document, and when.
 
 https://github.com/NagaYu/dendro
+
+---
+
+### Thread — English (7 posts)
+
+**1/7 [268]**
+
+AI-text detectors read prose.
+
+Prose is the part an adversary controls.
+
+Paraphrase someone's writing and a perplexity detector doesn't merely fail — in my benchmark it
+goes below chance, AUC 0.14, systematically calling human writing synthetic.
+
+So I built Dendro. 🧵
+
+**2/7 [239]**
+
+It asks a different question: who, other than the author, saw this — and when?
+
+The name is from dendrochronology. You don't date a beam by inspecting the grain for signs of
+modernity. You match its rings against an independent chronology.
+
+**3/7 [243]**
+
+Dendro matches a document's fingerprint against archives that already witnessed it: Internet
+Archive, Common Crawl, arXiv, Crossref.
+
+The unit of independence is the *operator*, not the record. Twenty captures from one archive
+are one archive.
+
+**4/7 [278]**
+
+Six generator generations, each measurably closer to human text.
+
+Perplexity detector: 0.89 → 0.62
+Dendro: flat at 1.00
+
+It never reads the prose, so the generator has no channel to matter through. On an unseen
+generator family the detector inverts to 0.23 — confidently wrong.
+
+**5/7 [222]**
+
+Backdated metadata is the one that surprised me.
+
+Forge a date in a meta tag: 100% of forgeries caught, 0% false accusations.
+
+Both text-based baselines catch 0% — structurally. They read prose, and the prose is unchanged.
+
+**6/7 [278]**
+
+And the number that matters most.
+
+On recent human documents no archive holds, Dendro drops to 0.500 — exactly chance — and
+abstains on 100% of them. The learned classifier scores 0.99 there.
+
+For unarchived text it's the better tool. That's in the README table, not a footnote.
+
+**7/7 [267]**
+
+Dendro is NOT an AI-writing detector and must not be used as one. It reports archival evidence
+of prior existence. No record = unknown, never "generated".
+
+5,034 real arXiv records. 96 tests, fully offline. Apache-2.0.
+
+https://github.com/NagaYu/dendro
+https://huggingface.co/datasets/NagaYu/dendro-lowbackground
+
+---
+
+### スレッド — 日本語（7投稿）
+
+**1/7 [237]**
+
+AI生成テキスト検出器は「文章」を読む。しかし文章は、攻撃者が自由に書き換えられる部分だ。
+
+人間の文章をLLMで言い換えると、パープレキシティ系検出器はAUC 0.14——偶然を下回る。人間の文章を体系的に「合成」と誤判定する。
+
+そこでDendroを作った🧵
+
+**2/7 [171]**
+
+問いを変える。「著者以外の誰が、いつこの内容を見たか?」
+
+名前は年輪年代学から。木材の年代は木目に新しさの兆候を探すのではなく、年代既知の独立した年輪系列と照合して決める。
+
+**3/7 [229]**
+
+Dendroは文書の指紋を、既に時刻がwitnessされたアーカイブと照合する。Internet Archive、Common Crawl、arXiv、Crossref。
+
+独立性の単位は「レコード数」ではなく「運営主体」。同一アーカイブの20件のキャプチャは1つのアーカイブでしかない。
+
+**4/7 [237]**
+
+生成モデル6世代、各世代が「人間の文章への距離」で実測して近づく設計。
+
+パープレキシティ系: 0.89 → 0.62
+Dendro: 1.00 で水平
+
+本文を一切読まないため、生成モデルが影響しうる経路が存在しない。未知の生成モデル系列では検出器は0.23に反転する。
+
+**5/7 [188]**
+
+バックデート偽装が一番意外だった。
+
+メタタグに偽の古い日付を埋め込む → 検出率100%、誤検出0%。
+
+本文ベースの手法は両方とも0%。構造上の話だ。本文を読む手法にとって、本文は無改変なのだから。
+
+**6/7 [239]**
+
+そして最も重要な数字。
+
+アーカイブに記録のない最近の人間の文章では、Dendroは0.500——完全に偶然——まで落ち、100%棄権する。学習型分類器はそこで0.99。
+
+未アーカイブの文章に関しては学習型の方が優れている。この列は脚注ではなくREADMEの表に入れた。
+
+**7/7 [218]**
+
+DendroはAI検出器ではないし、そう使ってはいけない。報告するのは「事前存在の証跡」だけ。記録がない=「不明」であって「生成」ではない。
+
+arXiv実データ5,034件。テスト96件、完全オフライン。Apache-2.0
+
+https://github.com/NagaYu/dendro
+
+---
+
+### X posting notes
+
+- **Attach the image to post 1**, not the last one. `figures/fig2_robustness.png` for the
+  thread — its left panel crossing *below* the chance line is exactly what post 1 claims, and
+  a reader who only sees the first post still gets the finding. Use
+  `figures/fig1_headline.png` for the single standalone post instead, since that one leads on
+  the flat line rather than the paraphrase result.
+- **Links in the last post only.** X suppresses reach on posts containing links; keeping 1/7
+  link-free gives the thread a better chance of being seen at all.
+- Post 6 is the one that earns credibility with researchers. Don't cut the thread at 5 to save
+  effort — ending on "100% caught" without the abstention result reads as marketing.
+- If you get HF PRO and I push the Space, add `Try it → https://huggingface.co/spaces/NagaYu/dendro`
+  to post 7. It fits: 7/7 is at 267 with two URLs, and a third would push it over, so drop the
+  dataset link and keep the Space + repo.
+- Verify any edit with `python3 scratchpad/xcount.py`-style weighting — CJK doubles, so the
+  Japanese posts have far less headroom than the character count in an editor suggests.
 
 ---
 
